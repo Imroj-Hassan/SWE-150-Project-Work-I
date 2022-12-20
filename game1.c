@@ -57,9 +57,9 @@ int main()
 
     load();
 
-    length=5;
+    length=3;
 
-    head.x=25;
+    head.x=22;
 
     head.y=20;
 
@@ -69,7 +69,7 @@ int main()
 
     Food(); //to generate food coordinates initially
 
-    life=3; //number of extra lives
+    life=2; //number of extra lives
 
     bend[0]=head;
 
@@ -202,7 +202,6 @@ void gotoxy(int x, int y)
  coord.Y = y;
 
  SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-
 }
 void GotoXY(int x, int y)
 {
@@ -267,7 +266,7 @@ void ExitGame()
         life--;
         if(life>=0)
         {
-            head.x=25;
+            head.x=22;
             head.y=20;
             bend_no=0;
             head.direction=RIGHT;
@@ -276,7 +275,7 @@ void ExitGame()
         else
         {
             system("cls");
-            printf("All lives completed\nBetter Luck Next Time!!!\nPress any key to quit the game\n");
+            printf("Press any key to quit the game");
             record();
             exit(0);
         }
@@ -327,7 +326,6 @@ void Left()
     Bend();
     if(!kbhit())
         head.x--;
-
 }
 void Right()
 {
@@ -422,31 +420,28 @@ void Boarder()
    system("cls");
    int i;
    GotoXY(food.x,food.y);   /*displaying food*/
-       printf("F");
+       printf("K");
    for(i=10;i<71;i++)
    {
        GotoXY(i,10);
-           printf("!");
+           printf("#");
        GotoXY(i,30);
-           printf("!");
+           printf("#");
    }
    for(i=10;i<31;i++)
    {
        GotoXY(10,i);
-           printf("!");
+           printf("#");
        GotoXY(70,i);
-       printf("!");
+       printf("#");
    }
 }
 void Print()
-{
-   //GotoXY(10,12);
-   printf("\tWelcome to the mini Snake game.(press any key to continue)\n");
+{   //GotoXY(10,12);
+   printf("Welcome to the mini Snake game.(press any key to continue)\n");
   getch();
    system("cls");
-   printf("\tGame instructions:\n");
-   printf("\n-> Use arrow keys to move the snake.\n\n-> You will be provided foods at the several coordinates of the screen which you have to eat. Everytime you eat a food the length of the snake will be increased by 1 element and thus the score.\n\n-> Here you are provided with three lives. Your life will decrease as you hit the wall or snake's body.\n\n-> YOu can pause the game in its middle by pressing any key. To continue the paused game press any other key once again\n\n-> If you want to exit press esc. \n");
-   printf("\n\nPress any key to play game...");
+   printf("Press any key to play game:-");
    if(getch()==27)
    exit(0);
 }
@@ -456,35 +451,6 @@ void record(){
    FILE *info;
    info=fopen("record.txt","a+");
    getch();
-   system("cls");
-   printf("Enter your name\n");
-   scanf("%[^\n]",plname);
-   //************************
-   for(j=0;plname[j]!='\0';j++){ //to convert the first letter after space to capital
-   nplname[0]=toupper(plname[0]);
-   if(plname[j-1]==' '){
-   nplname[j]=toupper(plname[j]);
-   nplname[j-1]=plname[j-1];}
-   else nplname[j]=plname[j];
-   }
-   nplname[j]='\0';
-   //*****************************
-   //sdfprintf(info,"\t\t\tPlayers List\n");
-   fprintf(info,"Player Name :%s\n",nplname);
-    //for date and time
-
-   time_t mytime;
-  mytime = time(NULL);
-  fprintf(info,"Played Date:%s",ctime(&mytime));
-     //**************************
-     fprintf(info,"Score:%d\n",px=Scoreonly());//call score to display score
-     //fprintf(info,"\nLevel:%d\n",10);//call level to display level
-   for(i=0;i<=50;i++)
-   fprintf(info,"%c",'_');
-   fprintf(info,"\n");
-   fclose(info);
-   printf("wanna see past records press 'y'\n");
-   cha=getch();
    system("cls");
    if(cha=='y'){
    info=fopen("record.txt","r");
@@ -497,9 +463,9 @@ int Score()
 {
    int score;
    GotoXY(20,8);
-   score=length-5;
-   printf("SCORE : %d",(length-5));
-   score=length-5;
+   score=length-3;
+   printf("SCORE : %d",(length-3));
+   score=length-3;
    GotoXY(50,8);
    printf("Life : %d",life);
    return score;
